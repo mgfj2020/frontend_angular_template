@@ -1,1 +1,358 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.scss */
+/* ======================================================
+   THEME GLOBAL (consolidado y ajustado)
+====================================================== */
+:root {
+  /* Base */
+  --base-hue: 222;
+  --bg-saturation: 47%;
+  --bg-lightness: 11%;
+
+  /* Accent */
+  --accent-hue: 199;
+
+  /* Effects */
+  --shadow-intensity: 0.5;
+  --glass-blur: 12px;
+
+  /* Derived */
+  --main-bg: hsl(
+    var(--base-hue),
+    var(--bg-saturation),
+    var(--bg-lightness)
+  );
+  --accent-color: hsl(var(--accent-hue), 89%, 61%);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ======================================================
+   BASE APP STYLES
+====================================================== */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--main-bg) 0%,
+    hsl(var(--base-hue), 30%, 20%) 100%
+  );
+  background-attachment: fixed;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease;
+}
+
+/* ======================================================
+   LAYOUT & BACKGROUND EFFECTS
+====================================================== */
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    var(--accent-color) 0%,
+    transparent 70%
+  );
+  opacity: 0.15;
+  filter: blur(80px);
+  border-radius: 50%;
+  z-index: -1;
+  animation: move 20s infinite alternate;
+}
+
+@keyframes move {
+  from {
+    transform: translate(-10%, -10%);
+  }
+  to {
+    transform: translate(30%, 20%);
+  }
+}
+
+/* ======================================================
+   NAVBAR
+====================================================== */
+.navbar {
+  background: hsla(var(--accent-hue), 40%, 10%, 0.7);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* ======================================================
+   GLASS CARD SYSTEM
+====================================================== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px
+    rgba(0, 0, 0, var(--shadow-intensity));
+  transition: all 0.3s ease;
+  overflow: hidden;
+  margin-bottom: 2rem;
+
+  &:not(.no-hover):hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+  }
+}
+
+.glass-card-header {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+.btn-custom {
+  background: var(--accent-color);
+  color: #0f172a;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 12px 30px;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px
+    hsla(var(--accent-hue), 80%, 50%, 0.4);
+
+  &:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+    color: #000;
+  }
+}
+
+/* ======================================================
+   UI CONTROLS (THEME PANEL)
+====================================================== */
+#ui-controls {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 280px;
+  z-index: 1050;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+  label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent-color);
+    margin-bottom: 15px;
+  }
+}
+
+/* ======================================================
+   TABS (NAV PILLS)
+====================================================== */
+.nav-pills {
+  .nav-link {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    margin-right: 10px;
+    border-radius: 12px;
+    padding: 10px 20px;
+    transition: 0.3s;
+
+    &.active {
+      background: var(--accent-color);
+      color: #0f172a;
+      font-weight: 600;
+      box-shadow: 0 0 15px var(--accent-color);
+    }
+  }
+}
+
+/* ======================================================
+   TABLES
+====================================================== */
+.table-responsive {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.custom-table {
+  tbody {
+    td {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.2rem;
+      border-bottom: 1px solid var(--glass-border);
+      vertical-align: middle;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+      strong {
+        color: #ffffff;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.text-secondary-pale {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* ======================================================
+   BADGES & ICONS
+====================================================== */
+.status-badge {
+  background: hsla(var(--accent-hue), 80%, 50%, 0.15);
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  background: hsla(var(--accent-hue), 80%, 50%, 0.1);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border: 1px solid
+    hsla(var(--accent-hue), 80%, 50%, 0.2);
+}
+
+/* ======================================================
+   KEY-VALUE BLOCK
+====================================================== */
+.kv-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kv-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.kv-key {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kv-value {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+/* ======================================================
+   Elementos de pagina internas
+====================================================== */
+.page-wrapper {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+}
+
+
+
+
+/* ======================================================
+   Elementos de pagina internas
+====================================================== */
+.glass-form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem hsla(var(--accent-hue), 80%, 50%, 0.25);
+    color: white;
+    outline: none;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Ajuste para selectores (dropdowns) */
+select.glass-input {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    appearance: none;
+}
+
+select.glass-input option {
+    background: #0f172a; /* Fondo sólido para legibilidad de opciones */
+    color: white;
+}
+
+

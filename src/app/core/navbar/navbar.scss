@@ -1,0 +1,67 @@
+/* navbar.component.scss */
+.glass-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: hsla(var(--accent-hue), 40%, 10%, 0.7);
+  backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.navbar-left .logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.logo .accent {
+  color: var(--accent-color);
+  margin-left: 2px;
+}
+
+.navbar-center {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-center a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  padding-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar-center a:hover {
+  color: #ffffff;
+}
+
+.navbar-center a.active {
+  color: #ffffff;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: var(--accent-color);
+  color: #0f172a;
+}

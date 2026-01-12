@@ -1,0 +1,22 @@
+<!-- navbar.component.html -->
+<nav class="navbar glass-navbar">
+  <!-- IZQUIERDA -->
+  <div class="navbar-left">
+    <a routerLink="/" class="logo"> AI<span class="accent">CORE</span> </a>
+  </div>
+
+  <!-- CENTRO -->
+  <ul class="navbar-center">
+    <li>
+      <a routerLink="/main" routerLinkActive="active">Home</a>
+    </li>
+    <li>
+      <a routerLink="/demo" routerLinkActive="active"> Demo </a>
+    </li>
+  </ul>
+
+  <!-- DERECHA -->
+  <div class="navbar-right">
+    <button class="btn-logout" (click)="logout()">Logout</button>
+  </div>
+</nav>

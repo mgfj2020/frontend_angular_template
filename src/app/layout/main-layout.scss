@@ -1,0 +1,11 @@
+/* app-layout.component.scss */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  padding: 1.5rem;
+}

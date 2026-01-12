@@ -1,0 +1,27 @@
+
+arquitectura orientada a Domain Driven Design (DDD) o Folders by Feature.
+-------------------------------------------------------------------------
+
+Un feature con multiples sub-features
+
+src/app/features/demo/
+├── components/                 # Componentes compartidos solo dentro de este feature
+│   └── demo-header/            # Ejemplo: un encabezado común para demo
+├── models/                     # Definiciones de tipos e interfaces del dominio
+│   ├── item.model.ts
+│   └── producto.model.ts
+├── services/                   # Lógica de estado global del feature (Signals)
+│   ├── demo.service.ts         # Orquestador principal de señales
+│   ├── item.service.ts         # Llamadas API específicas para items
+│   └── producto.service.ts     # Llamadas API específicas para productos
+├── pages/                      # Componentes que actúan como vistas de ruta (Smart Components)
+│   ├── demo-shell/             # Contenedor principal con <router-outlet>
+│   │   ├── demo-shell.ts
+│   │   └── demo-shell.html
+│   ├── item-list/              # Vista de la tabla de items
+│   │   ├── item-list.ts
+│   │   └── item-list.html
+│   └── producto-list/          # Vista de la tabla de productos
+│       ├── producto-list.ts
+│       └── producto-list.html
+└── demo.routes.ts              # Definición de sub-rutas del feature

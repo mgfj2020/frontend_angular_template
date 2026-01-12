@@ -1,0 +1,126 @@
+/* login.component.scss */
+:root {
+  --base-hue: 222;
+  --bg-saturation: 47%;
+  --bg-lightness: 11%;
+  --accent-hue: 199;
+  --shadow-intensity: 0.5;
+  --glass-blur: 12px;
+
+  --main-bg: hsl(var(--base-hue), var(--bg-saturation), var(--bg-lightness));
+  --accent-color: hsl(var(--accent-hue), 89%, 61%);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--main-bg) 0%,
+    hsl(var(--base-hue), 30%, 20%) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    var(--accent-color) 0%,
+    transparent 70%
+  );
+  opacity: 0.15;
+  filter: blur(80px);
+  border-radius: 50%;
+  animation: move 20s infinite alternate;
+}
+
+@keyframes move {
+  from {
+    transform: translate(-20%, -20%);
+  }
+  to {
+    transform: translate(30%, 30%);
+  }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  z-index: 1;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, var(--shadow-intensity));
+}
+
+.icon-box {
+  width: 72px;
+  height: 72px;
+  background: hsla(var(--accent-hue), 80%, 50%, 0.15);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: var(--accent-color);
+  box-shadow: inset 0 0 15px hsla(var(--accent-hue), 80%, 50%, 0.2);
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-color);
+  box-shadow: none;
+  color: white;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-color);
+}
+
+.btn-custom {
+  background: var(--accent-color);
+  color: #0f172a;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 12px;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px hsla(var(--accent-hue), 80%, 50%, 0.4);
+}
+
+.btn-custom:hover {
+  filter: brightness(1.2);
+  transform: scale(1.03);
+  color: #000;
+}
+
+.error {
+  color: #f87171;
+  font-size: 0.9rem;
+}
