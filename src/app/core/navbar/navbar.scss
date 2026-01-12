@@ -4,9 +4,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.5rem;
-  background: hsla(var(--accent-hue), 40%, 10%, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(var(--panel-blur));
-  border-bottom: 2px solid var(--accent-color);
+  border-bottom: 1px solid var(--panel-border);
 }
 
 .navbar-left .logo {

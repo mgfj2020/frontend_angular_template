@@ -3,36 +3,36 @@
    THEME GLOBAL (consolidado y ajustado)
 ====================================================== */
 :root {
-  /* Base Colors */
-  --base-hue: 222;
-  --bg-saturation: 47%;
-  --bg-lightness: 11%;
-  --accent-hue: 199;
+  /* Base Colors (Slate/Blue Light) */
+  --base-hue: 220;
+  --bg-saturation: 15%;
+  --bg-lightness: 98%;
+  --accent-hue: 221;
 
   /* Theme Colors */
-  --main-bg: hsl(var(--base-hue), var(--bg-saturation), var(--bg-lightness));
-  --accent-color: hsl(var(--accent-hue), 89%, 61%);
-  --accent-glow: hsla(var(--accent-hue), 80%, 50%, 0.4);
+  --main-bg: #f8fafc;
+  --accent-color: #2563eb;
+  --accent-glow: rgba(37, 99, 235, 0.15);
 
   /* Text Colors */
-  --text-main: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --text-contrast: #0f172a;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-contrast: #ffffff;
 
   /* Status Colors */
-  --color-error: #f87171;
-  --color-success: #34d399;
+  --color-error: #dc2626;
+  --color-success: #16a34a;
 
   /* Panels & Cards */
-  --panel-bg: rgba(255, 255, 255, 0.05);
-  --panel-border: rgba(255, 255, 255, 0.1);
-  --panel-blur: 12px;
-  --shadow-intensity: 0.5;
-  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, var(--shadow-intensity));
+  --panel-bg: #ffffff;
+  --panel-border: #e2e8f0;
+  --panel-blur: 8px;
+  --shadow-intensity: 0.1;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
 
   /* Inputs & Forms */
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --input-focus-bg: rgba(255, 255, 255, 0.08);
+  --input-bg: #ffffff;
+  --input-focus-bg: #fcfcfd;
 }
 
 /* ======================================================
@@ -47,9 +47,10 @@ body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg,
-      var(--main-bg) 0%,
-      hsl(var(--base-hue), 30%, 20%) 100%);
+  background-color: var(--main-bg);
+  background-image:
+    radial-gradient(at 100% 0%, #e0e7ff 0px, transparent 40%),
+    radial-gradient(at 0% 100%, #f1f5f9 0px, transparent 40%);
   background-attachment: fixed;
   color: var(--text-main);
   min-height: 100vh;
@@ -67,7 +68,7 @@ body {
   background: radial-gradient(circle,
       var(--accent-color) 0%,
       transparent 70%);
-  opacity: 0.15;
+  opacity: 0.05;
   filter: blur(80px);
   border-radius: 50%;
   z-index: -1;
@@ -88,10 +89,10 @@ body {
    NAVBAR
 ====================================================== */
 .navbar {
-  background: hsla(var(--accent-hue), 40%, 10%, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(var(--panel-blur));
   -webkit-backdrop-filter: blur(var(--panel-blur));
-  border-bottom: 2px solid var(--accent-color);
+  border-bottom: 1px solid var(--panel-border);
 }
 
 /* ======================================================
@@ -129,7 +130,7 @@ body {
 ====================================================== */
 .btn-custom {
   background: var(--accent-color);
-  color: #0f172a;
+  color: var(--text-contrast);
   font-weight: 600;
   border-radius: 12px;
   padding: 12px 30px;
@@ -138,9 +139,8 @@ body {
   box-shadow: 0 4px 15px var(--accent-glow);
 
   &:hover {
-    filter: brightness(1.2);
+    filter: brightness(0.9);
     transform: scale(1.05);
-    color: #000;
   }
 }
 
@@ -181,8 +181,8 @@ body {
 ====================================================== */
 .nav-pills {
   .nav-link {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    background: #f1f5f9;
     border: 1px solid var(--panel-border);
     margin-right: 10px;
     border-radius: 12px;
@@ -191,9 +191,9 @@ body {
 
     &.active {
       background: var(--accent-color);
-      color: #0f172a;
+      color: var(--text-contrast);
       font-weight: 600;
-      box-shadow: 0 0 15px var(--accent-color);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -209,7 +209,7 @@ body {
 .custom-table {
   tbody {
     td {
-      background: rgba(255, 255, 255, 0.05);
+      background: #ffffff;
       padding: 1.2rem;
       border-bottom: 1px solid var(--panel-border);
       vertical-align: middle;
@@ -267,7 +267,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--panel-border);
 }
 
 .kv-key {
@@ -302,6 +302,7 @@ body {
   h1 {
     margin: 0;
     font-size: 1.4rem;
+    color: var(--text-main);
   }
 }
 
@@ -328,16 +329,16 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--panel-border);
   border-radius: 12px;
-  color: white;
+  color: var(--text-main);
   padding: 12px 15px;
   transition: all 0.3s ease;
 }
 
 .form-input-custom:focus {
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff;
   border-color: var(--accent-color);
   box-shadow: 0 0 0 0.25rem var(--accent-glow);
-  color: white;
+  color: var(--text-main);
   outline: none;
 }
 
@@ -348,7 +349,7 @@ body {
 /* Ajuste para selectores (dropdowns) */
 select.form-input-custom {
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
