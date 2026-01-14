@@ -1,7 +1,36 @@
-/* auth-layout.component.scss */
+:host {
+    display: block;
+    height: 100vh;
+    width: 100%;
+}
+
 .auth-layout {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* Change from center to stretch to allow containers to work */
+    justify-content: center;
+    min-height: 100%;
+    padding: 2rem;
+    background-color: var(--bg);
+    animation: fadeIn 0.4s ease-out;
+
+    /* Internal wrapper to center the card while allowing it to have responsive width */
+    .auth-centering-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

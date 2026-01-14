@@ -1,38 +1,27 @@
 /* styles.scss */
 /* ======================================================
-   THEME GLOBAL (consolidado y ajustado)
+   THEME GLOBAL (Minimal Gray Dashboard)
 ====================================================== */
 :root {
-  /* Base Colors (Slate/Blue Light) */
-  --base-hue: 220;
-  --bg-saturation: 15%;
-  --bg-lightness: 98%;
-  --accent-hue: 221;
+  --bg: #f4f7f6;
+  --white: #ffffff;
+  --gray-light: #8e8f8f;
+  --gray-medium: #5a6270;
+  --text-dark: #343a40;
+  --accent: #6c757d;
+  --shadow: 0 10px 25px rgb(75 72 72 / 89%);
 
-  /* Theme Colors */
-  --main-bg: #f8fafc;
-  --accent-color: #2563eb;
-  --accent-glow: rgba(37, 99, 235, 0.15);
-
-  /* Text Colors */
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --text-contrast: #ffffff;
-
-  /* Status Colors */
-  --color-error: #dc2626;
-  --color-success: #16a34a;
-
-  /* Panels & Cards */
-  --panel-bg: #ffffff;
-  --panel-border: #e2e8f0;
-  --panel-blur: 8px;
-  --shadow-intensity: 0.1;
-  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-
-  /* Inputs & Forms */
-  --input-bg: #ffffff;
-  --input-focus-bg: #fcfcfd;
+  /* Legacy variable mappings for compatibility */
+  --main-bg: var(--bg);
+  --accent-color: var(--accent);
+  --accent-glow: rgba(108, 117, 125, 0.15);
+  --text-main: var(--text-dark);
+  --text-muted: var(--gray-medium);
+  --text-contrast: var(--white);
+  --panel-bg: var(--white);
+  --panel-border: var(--gray-light);
+  --panel-blur: 0px;
+  --card-shadow: var(--shadow);
 }
 
 /* ======================================================
@@ -45,155 +34,155 @@ body {
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
-  background-color: var(--main-bg);
-  background-image:
-    radial-gradient(at 100% 0%, #e0e7ff 0px, transparent 40%),
-    radial-gradient(at 0% 100%, #f1f5f9 0px, transparent 40%);
-  background-attachment: fixed;
-  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
   transition: background 0.3s ease;
 }
 
 /* ======================================================
-   LAYOUT & BACKGROUND EFFECTS
-====================================================== */
-.blob {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle,
-      var(--accent-color) 0%,
-      transparent 70%);
-  opacity: 0.05;
-  filter: blur(80px);
-  border-radius: 50%;
-  z-index: -1;
-  animation: move 20s infinite alternate;
-}
-
-@keyframes move {
-  from {
-    transform: translate(-10%, -10%);
-  }
-
-  to {
-    transform: translate(30%, 20%);
-  }
-}
-
-/* ======================================================
    NAVBAR
 ====================================================== */
 .navbar {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(var(--panel-blur));
-  -webkit-backdrop-filter: blur(var(--panel-blur));
-  border-bottom: 1px solid var(--panel-border);
+  background: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-light);
+
+  .logo {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+
+    strong {
+      color: var(--text-dark);
+    }
+  }
+
+  .accent {
+    color: var(--gray-medium);
+  }
+
+  .navbar-center {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+
+    a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.3s;
+
+      &:hover,
+      &.active {
+        color: var(--text-dark);
+      }
+    }
+  }
+
+  .btn-logout {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+
+    &:hover {
+      background: var(--text-dark);
+    }
+  }
 }
 
 /* ======================================================
    CARD SYSTEM
 ====================================================== */
 .card-main {
-  background: var(--panel-bg);
-  backdrop-filter: blur(var(--panel-blur));
-  -webkit-backdrop-filter: blur(var(--panel-blur));
-  border: 1px solid var(--panel-border);
-  border-radius: 24px;
-  box-shadow: var(--card-shadow);
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+  box-shadow: var(--shadow);
   transition: all 0.3s ease;
   overflow: hidden;
   margin-bottom: 2rem;
+  width: 100%;
+  /* Ensure it spans the grid column */
 
   &:not(.no-hover):hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
+    border-color: var(--gray-medium);
   }
 }
 
 .card-header-custom {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 1.25rem 2rem;
-  border-bottom: 1px solid var(--panel-border);
+  background: var(--bg);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--gray-light);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-main);
+  color: var(--accent);
 }
 
 /* ======================================================
    BUTTONS
 ====================================================== */
-.btn-custom {
-  background: var(--accent-color);
-  color: var(--text-contrast);
-  font-weight: 600;
-  border-radius: 12px;
-  padding: 12px 30px;
+.btn-custom,
+.btn {
+  background: var(--accent);
+  color: white;
   border: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--accent-glow);
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.9rem;
 
   &:hover {
-    filter: brightness(0.9);
-    transform: scale(1.05);
-  }
-}
-
-/* ======================================================
-   UI CONTROLS (THEME PANEL)
-====================================================== */
-#ui-controls {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  width: 280px;
-  z-index: 1050;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--panel-border);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-
-  label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--accent-color);
-    margin-bottom: 5px;
-    display: block;
+    background: var(--text-dark);
+    transform: none;
   }
 
-  input[type="range"] {
-    width: 100%;
-    accent-color: var(--accent-color);
-    margin-bottom: 15px;
+  &.btn-outline {
+    background: transparent;
+    border: 1px solid var(--gray-light);
+    color: var(--accent);
+
+    &:hover {
+      background: var(--bg);
+      border-color: var(--gray-medium);
+      color: var(--text-dark);
+    }
   }
-}
 
-/* ======================================================
-   TABS (NAV PILLS)
-====================================================== */
-.nav-pills {
-  .nav-link {
-    color: var(--text-muted);
-    background: #f1f5f9;
-    border: 1px solid var(--panel-border);
-    margin-right: 10px;
-    border-radius: 12px;
-    padding: 10px 20px;
-    transition: 0.3s;
+  &.btn-danger {
+    background: #e74c3c;
 
-    &.active {
-      background: var(--accent-color);
-      color: var(--text-contrast);
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    &:hover {
+      background: #c0392b;
+    }
+  }
+
+  &.btn-success {
+    background: #27ae60;
+
+    &:hover {
+      background: #219150;
     }
   }
 }
@@ -201,41 +190,48 @@ body {
 /* ======================================================
    TABLES
 ====================================================== */
+.table-container,
 .table-responsive {
-  border-radius: 15px;
-  overflow: hidden;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
 }
 
-.custom-table {
-  tbody {
-    td {
-      background: #ffffff;
-      padding: 1.2rem;
-      border-bottom: 1px solid var(--panel-border);
-      vertical-align: middle;
-      color: rgba(255, 255, 255, 0.9);
-      font-weight: 400;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-
-      strong {
-        color: #ffffff;
-        font-weight: 600;
-      }
-    }
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-.text-secondary-pale {
-  color: rgba(255, 255, 255, 0.6) !important;
+th {
+  background: var(--bg);
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+  border-bottom: 1px solid var(--gray-light);
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--gray-light);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+tr:hover {
+  background: #fafafa;
 }
 
 /* ======================================================
    BADGES & ICONS
 ====================================================== */
 .status-badge {
-  background: hsla(var(--accent-hue), 80%, 50%, 0.15);
-  border: 1px solid var(--accent-color);
-  color: var(--accent-color);
+  background: var(--bg);
+  border: 1px solid var(--gray-light);
+  color: var(--accent);
   padding: 4px 12px;
   border-radius: 8px;
   font-size: 0.8rem;
@@ -244,13 +240,14 @@ body {
 .icon-box {
   width: 60px;
   height: 60px;
-  background: hsla(var(--accent-hue), 80%, 50%, 0.1);
+  background: var(--bg);
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  border: 1px solid hsla(var(--accent-hue), 80%, 50%, 0.2);
+  border: 1px solid var(--gray-light);
+  color: var(--accent);
 }
 
 /* ======================================================
@@ -267,11 +264,11 @@ body {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--gray-light);
 }
 
 .kv-key {
-  color: var(--accent-color);
+  color: var(--accent);
   font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -279,85 +276,67 @@ body {
 }
 
 .kv-value {
-  color: #ffffff;
+  color: var(--text-dark);
   font-size: 0.9rem;
 }
 
 /* ======================================================
-   Elementos de pagina internas
+   FORM ELEMENTS
 ====================================================== */
-.page-wrapper {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.form-group {
+  margin-bottom: 1rem;
 }
 
-.header-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-
-  h1 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--text-main);
-  }
-}
-
-
-
-
-/* ======================================================
-   Elementos de pagina internas
-====================================================== */
-/* ======================================================
-   Form elements
-====================================================== */
-.form-label-custom {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--accent-color);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.form-label-custom,
+label {
   display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: var(--accent);
+  font-weight: 500;
 }
 
-.form-input-custom {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  color: var(--text-main);
-  padding: 12px 15px;
-  transition: all 0.3s ease;
-}
-
-.form-input-custom:focus {
-  background: #ffffff;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 0.25rem var(--accent-glow);
-  color: var(--text-main);
+.form-input-custom,
+input,
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--gray-light);
+  border-radius: 4px;
   outline: none;
+  background: var(--white);
+  color: var(--text-dark);
+  transition: border-color 0.3s;
 }
 
-.form-input-custom::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+.form-input-custom:focus,
+input:focus,
+select:focus {
+  border-color: var(--gray-medium);
 }
 
-/* Ajuste para selectores (dropdowns) */
-select.form-input-custom {
-  cursor: pointer;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 16px 12px;
-  appearance: none;
+/* ======================================================
+   CARD GRID & EXTRA CARD STYLES
+====================================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-select.form-input-custom option {
-  background: #0f172a;
-  /* Fondo sólido para legibilidad de opciones */
-  color: white;
+.card-main .value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 0.5rem;
+}
+
+/* Specific card title styling within components */
+.card-main h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }

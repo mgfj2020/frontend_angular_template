@@ -1,39 +1,42 @@
-<div class="container mt-4">
-  <div class="card-main p-4">
-    <h3 class="mb-4">Listado Demo desde FastAPI</h3>
+<div class="container">
+  <div class="mb-4">
+    <h3 class="mb-2" style="color: var(--gray-medium); text-transform: uppercase; font-size: 0.8rem;">Listado Demo desde
+      FastAPI</h3>
+  </div>
 
-    @if (demoService.loading()) {
-    <div class="text-center py-4">
-      <div class="spinner-border text-primary" role="status"></div>
+  @if (demoService.loading()) {
+  <div class="table-container">
+    <div class="spinner-container">
+      <div class="spinner-border" role="status"></div>
       <p>Obteniendo datos...</p>
     </div>
-    } @else {
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead class="table-light">
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Valor</th>
-            <th>Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (item of demoService.items(); track item.id) {
-          <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.nombre }}</td>
-            <td>{{ item.valor | number : '1.2-2' }}</td>
-            <td>{{ item.fecha | date : 'dd/MM/yyyy' }}</td>
-          </tr>
-          } @empty {
-          <tr>
-            <td colspan="4" class="text-center text-muted">No hay registros disponibles.</td>
-          </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-    }
   </div>
+  } @else {
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Valor</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of demoService.items(); track item.id) {
+        <tr [routerLink]="['/demo/show', item.id]" style="cursor: pointer;">
+          <td>#{{ item.id }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.valor | number : '1.2-2' }}</td>
+          <td>{{ item.fecha | date : 'dd/MM/yyyy' }}</td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="4" class="empty-state">No hay registros disponibles.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
 </div>

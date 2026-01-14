@@ -11,11 +11,10 @@ export const DEMO_ROUTES: Routes = [
     loadComponent: () => import('./pages/list/list').then(m => m.List)
   },
 
-  /*
   {
     path: 'show/:id',
     loadComponent: () =>
-      import('./pages/show/show.component')
-        .then(m => m.ShowComponent)
-  }*/
+      import('./pages/show/show')
+        .then(m => m.Show)
+  }
 ];

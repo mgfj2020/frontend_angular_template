@@ -1,0 +1,49 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            @if (demoService.loading()) {
+            <div class="card-main text-center py-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted">Obteniendo datos...</p>
+            </div>
+            } @else if (demoService.item(); as item) {
+            <div class="card-main">
+                <div class="card-header-custom">
+                    <span>Detalle de la Licitación</span>
+                    <a routerLink="/demo/list" class="btn btn-sm btn-link text-decoration-none p-0">
+                        Volver
+                    </a>
+                </div>
+                <div class="p-4">
+                    <div class="kv-container">
+                        <div class="kv-item">
+                            <span class="kv-key">NOMBRE</span>
+                            <span class="kv-value">{{ item.licitacion_nombre }}</span>
+                        </div>
+                        <div class="kv-item">
+                            <span class="kv-key">ENCARGADO</span>
+                            <span class="kv-value">{{ item.licitacion_encargado }}</span>
+                        </div>
+                        <div class="kv-item">
+                            <span class="kv-key">FECHA INICIO</span>
+                            <span class="kv-value">{{ item.licitacion_fecha_inicio | date : 'dd/MM/yyyy' }}</span>
+                        </div>
+                        <div class="kv-item">
+                            <span class="kv-key">FECHA TÉRMINO</span>
+                            <span class="kv-value">{{ item.licitacion_fecha_termino | date : 'dd/MM/yyyy' }}</span>
+                        </div>
+                        <div class="kv-item border-0">
+                            <span class="kv-key">REGISTRO</span>
+                            <span class="kv-value">{{ item.licitacion_fecha_creacion | date : 'short' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            } @else {
+            <div class="alert alert-warning text-center">
+                No se encontró la licitación seleccionada.
+            </div>
+            }
+        </div>
+    </div>
+</div>

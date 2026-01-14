@@ -1,10 +1,16 @@
-<!-- home.html -->
-<div class="home-wrapper">
-  <div class="card-main home-card">
-    <h1 class="mb-3">👋 ¡Bienvenido!</h1>
+<div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card-main home-card content-center shadow-sm">
+        <h1 class="mb-3">👋 ¡Bienvenido!</h1>
 
-    <p class="text-secondary mb-4">Has iniciado sesión correctamente.</p>
+        <p class="text-secondary mb-4">Has iniciado sesión correctamente.</p>
 
-    <p class="subtitle">Selecciona una opción en el menú superior para comenzar.</p>
+        <div class="d-flex gap-3 justify-content-center">
+          <button class="btn btn-dark px-4" routerLink="/demo">Ir a Demo</button>
+          <button class="btn btn-outline-secondary px-4" (click)="onLogout()">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

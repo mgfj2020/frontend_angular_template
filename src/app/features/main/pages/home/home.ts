@@ -7,7 +7,7 @@ import { AuthService } from '../../../../core/auth_user/pages/login/login';
   selector: 'app-home',
   imports: [CommonModule],
   templateUrl: './home.html',
-  styleUrls: ['./home.scss'],
+  styleUrl: './home.scss'
 })
 export class HomeComponent {
 
@@ -18,7 +18,7 @@ export class HomeComponent {
     private authService: AuthService
   ) { }
 
-  logout() {
+  onLogout() {
     this.authService.logout();
   }
 

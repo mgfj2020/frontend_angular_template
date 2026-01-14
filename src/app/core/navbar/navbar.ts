@@ -6,12 +6,11 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
-  templateUrl: './navbar.html',
-  styleUrls: ['./navbar.scss']
+  templateUrl: './navbar.html'
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   logout() {
     // Elimina token o sesión
@@ -21,4 +20,4 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
- }
+}

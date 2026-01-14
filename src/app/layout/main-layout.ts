@@ -7,7 +7,6 @@ import { NavbarComponent } from '../core/navbar/navbar';
   standalone: true,
   imports: [RouterOutlet, NavbarComponent],
   templateUrl: './main-layout.html',
-  styleUrls: ['./main-layout.scss']
-
+  styleUrl: './main-layout.scss'
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent { }

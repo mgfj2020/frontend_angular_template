@@ -1,22 +1,24 @@
 <!-- navbar.component.html -->
 <nav class="navbar navbar-main">
-  <!-- IZQUIERDA -->
-  <div class="navbar-left">
-    <a routerLink="/" class="logo"> AI<span class="accent">CORE</span> </a>
-  </div>
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- IZQUIERDA -->
+    <div class="navbar-left">
+      <a routerLink="/" class="logo"><strong>GRY</strong>SCALE</a>
+    </div>
 
-  <!-- CENTRO -->
-  <ul class="navbar-center">
-    <li>
-      <a routerLink="/main" routerLinkActive="active">Home</a>
-    </li>
-    <li>
-      <a routerLink="/demo" routerLinkActive="active"> Demo </a>
-    </li>
-  </ul>
+    <!-- CENTRO -->
+    <ul class="navbar-center mb-0">
+      <li>
+        <a routerLink="/main" routerLinkActive="active">Home</a>
+      </li>
+      <li>
+        <a routerLink="/demo" routerLinkActive="active"> Demo </a>
+      </li>
+    </ul>
 
-  <!-- DERECHA -->
-  <div class="navbar-right">
-    <button class="btn-logout" (click)="logout()">Logout</button>
+    <!-- DERECHA -->
+    <div class="navbar-right">
+      <button class="btn-logout" (click)="logout()">Logout</button>
+    </div>
   </div>
 </nav>
