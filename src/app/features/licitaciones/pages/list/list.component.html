@@ -1,0 +1,45 @@
+<div class="table-container">
+    <div class="header-row">
+        <h2>Listado de Licitaciones</h2>
+        <a routerLink="/licitaciones/new" class="btn-new">
+            Nueva Licitación
+        </a>
+    </div>
+
+    <div *ngIf="licitacionService.loading()" class="loading">
+        Cargando licitaciones...
+    </div>
+
+    <div *ngIf="licitacionService.error()" class="error">
+        {{ licitacionService.error() }}
+    </div>
+
+    <table *ngIf="!licitacionService.loading() && licitacionService.list()">
+        <thead>
+            <tr>
+                <th>Nombre Licitación</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of licitacionService.list()?.licitaciones">
+                <td>{{ item.nombre }}</td>
+                <td>
+                    <span class="status-badge">{{ item.estado }}</span>
+                </td>
+                <td>{{ item.fecha_carga | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>
+                    <button class="btn-show" (click)="onShow(item.id)">
+                        Show
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!licitacionService.loading() && licitacionService.list()?.licitaciones?.length === 0">
+        No se encontraron licitaciones.
+    </div>
+</div>

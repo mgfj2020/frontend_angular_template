@@ -16,3 +16,14 @@ export interface LicitacionNewResponse {
     nombre: string;
     archivos_procesados: FileValidationResult[];
 }
+
+export interface LicitacionListItem {
+    id: string;
+    nombre: string;
+    estado: string;
+    fecha_carga: string;
+}
+
+export interface LicitacionListResponse {
+    licitaciones: LicitacionListItem[];
+}
