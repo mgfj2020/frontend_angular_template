@@ -340,3 +340,85 @@ select:focus {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* ======================================================
+   DRAG & DROP ZONE
+====================================================== */
+.drop-zone {
+  width: 100%;
+  height: 200px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed var(--gray-light);
+  border-radius: 8px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--accent);
+
+  &.drag-over {
+    border-color: var(--gray-medium);
+    background: #eef2f1;
+    color: var(--text-dark);
+  }
+
+  .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.file-list {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-radius: 4px;
+    font-size: 0.9rem;
+
+    .file-info {
+      display: flex;
+      flex-direction: column;
+      
+      .file-name {
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+      
+      .file-error {
+        font-size: 0.75rem;
+        color: #e74c3c;
+      }
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0 0.5rem;
+      
+      &:hover {
+        color: #c0392b;
+      }
+    }
+    
+    &.invalid {
+      border-color: #e74c3c;
+      background: #fdf2f1;
+    }
+  }
+}
