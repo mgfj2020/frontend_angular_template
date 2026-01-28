@@ -3,6 +3,11 @@
         4. Ítems Solicitados
     </div>
 
+    <!-- Notification Alert -->
+    <div *ngIf="notification().type" [class]="'notification-bar ' + notification().type">
+        {{ notification().message }}
+    </div>
+
     <div class="items-card">
         <div *ngIf="loading()" class="loading-spinner">
             Cargando ítems...
@@ -21,15 +26,61 @@
                         <th class="col-cantidad">Cantidad</th>
                         <th class="col-unidad">Unidad</th>
                         <th class="col-descripcion">Descripción</th>
+                        <th class="col-observaciones">Observaciones</th>
+                        <th class="col-acciones">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of items(); let i = index">
                         <td class="col-num">{{ i + 1 }}</td>
-                        <td class="col-producto">{{ item.nombre_item }}</td>
-                        <td class="col-cantidad">{{ item.cantidad }}</td>
-                        <td class="col-unidad">{{ item.unidad }}</td>
-                        <td class="col-descripcion">{{ item.descripcion }}</td>
+
+                        <!-- nombre_item -->
+                        <td class="col-producto">
+                            <span *ngIf="editingId() !== item.id">{{ item.nombre_item }}</span>
+                            <input *ngIf="editingId() === item.id" [(ngModel)]="editForm().nombre_item"
+                                class="edit-input">
+                        </td>
+
+                        <!-- cantidad -->
+                        <td class="col-cantidad">
+                            <span *ngIf="editingId() !== item.id">{{ item.cantidad }}</span>
+                            <input *ngIf="editingId() === item.id" type="number" [(ngModel)]="editForm().cantidad"
+                                class="edit-input">
+                        </td>
+
+                        <!-- unidad -->
+                        <td class="col-unidad">
+                            <span *ngIf="editingId() !== item.id">{{ item.unidad }}</span>
+                            <input *ngIf="editingId() === item.id" [(ngModel)]="editForm().unidad" class="edit-input">
+                        </td>
+
+                        <!-- descripcion -->
+                        <td class="col-descripcion">
+                            <span *ngIf="editingId() !== item.id">{{ item.descripcion }}</span>
+                            <textarea *ngIf="editingId() === item.id" [(ngModel)]="editForm().descripcion"
+                                class="edit-textarea"></textarea>
+                        </td>
+
+                        <!-- observaciones -->
+                        <td class="col-observaciones">
+                            <span *ngIf="editingId() !== item.id">{{ item.observaciones }}</span>
+                            <textarea *ngIf="editingId() === item.id" [(ngModel)]="editForm().observaciones"
+                                class="edit-textarea"></textarea>
+                        </td>
+
+                        <!-- acciones -->
+                        <td class="col-acciones">
+                            <div class="action-buttons" *ngIf="editingId() !== item.id">
+                                <button class="btn-edit" (click)="startEdit(item)">Editar</button>
+                            </div>
+                            <div class="action-buttons" *ngIf="editingId() === item.id">
+                                <button class="btn-save" (click)="saveEdit()" [disabled]="saving()">
+                                    {{ saving() ? '...' : 'Guardar' }}
+                                </button>
+                                <button class="btn-cancel" (click)="cancelEdit()"
+                                    [disabled]="saving()">Cancelar</button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

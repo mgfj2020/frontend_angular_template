@@ -65,7 +65,117 @@
 }
 
 .col-descripcion {
-    min-width: 300px;
+    min-width: 250px;
+}
+
+.col-observaciones {
+    min-width: 200px;
+}
+
+.col-acciones {
+    width: 150px;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.edit-textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    min-height: 60px;
+    resize: vertical;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit,
+.btn-save,
+.btn-cancel {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-edit {
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    color: #374151;
+}
+
+.btn-edit:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-save {
+    background-color: #059669;
+    border: 1px solid #059669;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #047857;
+}
+
+.btn-save:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    background-color: white;
+    border: 1px solid #d1d5db;
+    color: #6b7280;
+}
+
+.btn-cancel:hover {
+    background-color: #f9fafb;
+}
+
+.notification-bar {
+    padding: 10px 20px;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    animation: slideDown 0.3s ease-out;
+}
+
+.notification-bar.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-bottom: 1px solid #10b981;
+}
+
+.notification-bar.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-bottom: 1px solid #ef4444;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .loading-spinner,

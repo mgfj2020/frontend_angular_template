@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ItemsService } from '../../services/items.service';
 import { ItemLicitacion } from '../../models/items.model';
 
 @Component({
     selector: 'app-items-show',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './show.component.html',
     styleUrls: ['./show.component.css']
 })
@@ -18,6 +19,14 @@ export class ItemsShowComponent implements OnInit {
     public items = signal<ItemLicitacion[]>([]);
     public loading = signal<boolean>(true);
     public error = signal<string | null>(null);
+
+    // Editing state
+    public editingId = signal<string | null>(null);
+    public editForm = signal<Partial<ItemLicitacion>>({});
+    public saving = signal<boolean>(false);
+
+    // Notifications
+    public notification = signal<{ message: string; type: 'success' | 'error' | null }>({ message: '', type: null });
 
     ngOnInit(): void {
         if (this.licitacionId) {
@@ -44,5 +53,47 @@ export class ItemsShowComponent implements OnInit {
                 this.loading.set(false);
             }
         });
+    }
+
+    startEdit(item: ItemLicitacion): void {
+        this.editingId.set(item.id);
+        this.editForm.set({ ...item });
+    }
+
+    cancelEdit(): void {
+        this.editingId.set(null);
+        this.editForm.set({});
+    }
+
+    saveEdit(): void {
+        const id = this.editingId();
+        const data = this.editForm();
+        if (!id) return;
+
+        this.saving.set(true);
+        this.itemsService.updateItem(id, data).subscribe({
+            next: (res) => {
+                if (res.success) {
+                    // Update local items list
+                    this.items.update(prev => prev.map(item => item.id === id ? { ...item, ...res.data } : item));
+                    this.showNotification('Ítem actualizado correctamente', 'success');
+                    this.cancelEdit();
+                } else {
+                    this.showNotification(res.message || 'Error al actualizar', 'error');
+                }
+                this.saving.set(false);
+            },
+            error: (err) => {
+                this.showNotification('Error de conexión', 'error');
+                this.saving.set(false);
+            }
+        });
+    }
+
+    private showNotification(message: string, type: 'success' | 'error'): void {
+        this.notification.set({ message, type });
+        setTimeout(() => {
+            this.notification.set({ message: '', type: null });
+        }, 3000);
     }
 }
