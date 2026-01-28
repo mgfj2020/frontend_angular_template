@@ -1,0 +1,52 @@
+<div class="items-container">
+    <div class="items-header">
+        4. Ítems Solicitados
+    </div>
+
+    <div class="items-card">
+        <div *ngIf="loading()" class="loading-spinner">
+            Cargando ítems...
+        </div>
+
+        <div *ngIf="error()" class="error-message">
+            {{ error() }}
+        </div>
+
+        <div *ngIf="!loading() && !error()">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th class="col-num">N°</th>
+                        <th class="col-producto">Producto / Servicio</th>
+                        <th class="col-cantidad">Cantidad</th>
+                        <th class="col-unidad">Unidad</th>
+                        <th class="col-descripcion">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items(); let i = index">
+                        <td class="col-num">{{ i + 1 }}</td>
+                        <td class="col-producto">{{ item.nombre_item }}</td>
+                        <td class="col-cantidad">{{ item.cantidad }}</td>
+                        <td class="col-unidad">{{ item.unidad }}</td>
+                        <td class="col-descripcion">{{ item.descripcion }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination-footer">
+                <div class="items-per-page">
+                    Ítems por página:
+                    <select>
+                        <option>20</option>
+                    </select>
+                </div>
+                <div class="pagination-controls">
+                    <button class="btn-pagination">Anterior</button>
+                    <span>Página 1 de 1</span>
+                    <button class="btn-pagination">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

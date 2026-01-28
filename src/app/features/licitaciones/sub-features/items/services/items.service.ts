@@ -1,0 +1,19 @@
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, of } from 'rxjs';
+import { ApiResponse } from '../../../models/licitacion.model';
+import { ItemsLicitacionResponse } from '../models/items.model';
+
+@Injectable({ providedIn: 'root' })
+export class ItemsService {
+    private http = inject(HttpClient);
+    private readonly API_URL = 'http://localhost:8000/licitaciones';
+
+    getItems(id: string): Observable<ApiResponse<ItemsLicitacionResponse>> {
+        return this.http.get<ApiResponse<ItemsLicitacionResponse>>(`${this.API_URL}/${id}/items`).pipe(
+            catchError(err => {
+                return of({ success: false, message: 'Error al obtener los ítems', data: null as any });
+            })
+        );
+    }
+}

@@ -50,6 +50,8 @@
 
     <app-datos-economicos-card [licitacionId]="licitacion()!.id"> </app-datos-economicos-card>
 
+    <app-items-show [licitacionId]="licitacion()!.id"></app-items-show>
+
     <div class="actions" *ngIf="!loading()">
         <button class="btn-back" routerLink="/licitaciones/list">Volver al listado</button>
     </div>

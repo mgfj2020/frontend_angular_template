@@ -4,11 +4,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LicitacionService } from '../../services/licitacion.service';
 import { LicitacionShowResponse } from '../../models/licitacion.model';
 import { DatosEconomicosCardComponent } from '../../sub-features/datos-economicos/components/datos-economicos-card/datos-economicos-card.component';
+import { ItemsShowComponent } from '../../sub-features/items/pages/show/show.component';
 
 @Component({
     selector: 'app-licitacion-show',
     standalone: true,
-    imports: [CommonModule, RouterModule, DatosEconomicosCardComponent],
+    imports: [CommonModule, RouterModule, DatosEconomicosCardComponent, ItemsShowComponent],
     templateUrl: './show.component.html',
     styleUrls: ['./show.component.css']
 })
