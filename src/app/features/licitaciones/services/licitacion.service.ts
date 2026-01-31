@@ -78,6 +78,14 @@ export class LicitacionService {
         ).subscribe(() => this._loading.set(false));
     }
 
+    updateLicitacion(id: string, data: Partial<LicitacionShowResponse>): Observable<ApiResponse<LicitacionShowResponse>> {
+        return this.http.put<ApiResponse<LicitacionShowResponse>>(`${this.API_URL}/${id}`, data).pipe(
+            catchError(err => {
+                return of({ success: false, message: 'Error al actualizar la licitación', data: null as any });
+            })
+        );
+    }
+
     resetState() {
         this._response.set(null);
         this._error.set(null);

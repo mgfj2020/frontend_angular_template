@@ -2,29 +2,61 @@
     <div class="card-header" *ngIf="showTitle">
         <div class="header-content">
             <span>2. Datos Económicos</span>
-            <a *ngIf="showEditButton" class="tag-edit" [routerLink]="['datos-economicos/editar']">
+            <button *ngIf="showEditButton && !isEditing()" class="tag-edit" (click)="startEdit()">
                 Editar
-            </a>
+            </button>
         </div>
     </div>
+
+    <!-- Notification Alert -->
+    <div *ngIf="notification().type" [class]="'notification-bar ' + notification().type">
+        {{ notification().message }}
+    </div>
+
     <div class="card-body">
         <div class="grid-container">
             <div class="field">
                 <label>Presupuesto máximo</label>
-                <div class="value-box">{{ datos()?.presupuesto_referencial || 'No especificado' | number }}</div>
+                <div *ngIf="!isEditing()" class="value-box">
+                    {{ datos()?.presupuesto_referencial || 'No especificado' | number }}
+                </div>
+                <input *ngIf="isEditing()" type="number" [(ngModel)]="editForm().presupuesto_referencial"
+                    class="edit-input">
             </div>
             <div class="field">
                 <label>Moneda de la oferta</label>
-                <div class="value-box">{{ datos()?.moneda || 'No especificado' }}</div>
+                <div *ngIf="!isEditing()" class="value-box">
+                    {{ datos()?.moneda || 'No especificado' }}
+                </div>
+                <select *ngIf="isEditing()" [(ngModel)]="editForm().moneda" class="edit-input">
+                    <option value="CLP">CLP - Peso Chileno</option>
+                    <option value="USD">USD - Dólar Americano</option>
+                    <option value="EUR">EUR - Euro</option>
+                </select>
             </div>
             <div class="field">
                 <label>Forma de pago</label>
-                <div class="value-box">{{ datos()?.forma_pago || 'No especificado' }}</div>
+                <div *ngIf="!isEditing()" class="value-box">
+                    {{ datos()?.forma_pago || 'No especificado' }}
+                </div>
+                <input *ngIf="isEditing()" [(ngModel)]="editForm().forma_pago" class="edit-input">
             </div>
             <div class="field">
                 <label>Plazo de pago</label>
-                <div class="value-box">{{ datos()?.plazo_pago || 'No especificado' }}</div>
+                <div *ngIf="!isEditing()" class="value-box">
+                    {{ datos()?.plazo_pago || 'No especificado' }}
+                </div>
+                <input *ngIf="isEditing()" [(ngModel)]="editForm().plazo_pago" class="edit-input">
             </div>
+        </div>
+
+        <div class="action-buttons" *ngIf="isEditing()">
+            <button class="btn-save" (click)="saveEdit()" [disabled]="saving()">
+                {{ saving() ? 'Guardando...' : 'Guardar Cambios' }}
+            </button>
+            <button class="btn-cancel" (click)="cancelEdit()" [disabled]="saving()">
+                Cancelar
+            </button>
         </div>
     </div>
 </div>

@@ -16,42 +16,68 @@
     </div>
 
     <div *ngIf="!loading() && licitacion()">
+        <!-- Notification Alert -->
+        <div *ngIf="notification().type" [class]="'notification-bar ' + notification().type">
+            {{ notification().message }}
+        </div>
+
         <div class="card">
             <div class="card-header">
-                1. Cabecera de la Licitación
+                <div class="header-content">
+                    <span>1. Cabecera de la Licitación</span>
+                    <button *ngIf="!isEditing()" class="tag-edit" (click)="startEdit()">
+                        Editar
+                    </button>
+                </div>
             </div>
             <div class="card-body">
                 <div class="grid-container">
                     <div class="field">
                         <label>ID Licitación / Código</label>
-                        <div class="value">{{ licitacion()?.codigo || 'No asignado' }}</div>
+                        <div *ngIf="!isEditing()" class="value">{{ licitacion()?.codigo || 'No asignado' }}</div>
+                        <input *ngIf="isEditing()" [(ngModel)]="editForm().codigo" class="edit-input">
                     </div>
                     <div class="field">
                         <label>Título</label>
-                        <div class="value">{{ licitacion()?.titulo }}</div>
+                        <div *ngIf="!isEditing()" class="value">{{ licitacion()?.titulo }}</div>
+                        <input *ngIf="isEditing()" [(ngModel)]="editForm().titulo" class="edit-input">
                     </div>
                     <div class="field">
                         <label>Organismo</label>
-                        <div class="value">{{ licitacion()?.organismo }}</div>
+                        <div *ngIf="!isEditing()" class="value">{{ licitacion()?.organismo }}</div>
+                        <input *ngIf="isEditing()" [(ngModel)]="editForm().organismo" class="edit-input">
                     </div>
                     <div class="field">
                         <label>Unidad solicitante</label>
-                        <div class="value">{{ licitacion()?.unidad_solicitante || 'No disponible' }}</div>
+                        <div *ngIf="!isEditing()" class="value">{{ licitacion()?.unidad_solicitante || 'No disponible'
+                            }}</div>
+                        <input *ngIf="isEditing()" [(ngModel)]="editForm().unidad_solicitante" class="edit-input">
                     </div>
                 </div>
 
                 <div class="description-section">
                     <label>Descripción</label>
-                    <div class="description-box">
+                    <div *ngIf="!isEditing()" class="description-box">
                         {{ licitacion()?.descripcion || 'Sin descripción disponible.' }}
                     </div>
+                    <textarea *ngIf="isEditing()" [(ngModel)]="editForm().descripcion" class="edit-textarea"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons-inline" *ngIf="isEditing()">
+                    <button class="btn-save" (click)="saveEdit()" [disabled]="saving()">
+                        {{ saving() ? 'Guardando...' : 'Guardar Cambios' }}
+                    </button>
+                    <button class="btn-cancel" (click)="cancelEdit()" [disabled]="saving()">
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>
 
-        <app-datos-economicos-card [licitacionId]="licitacion()!.id"> </app-datos-economicos-card>
+        <app-datos-economicos-card [licitacionId]="licitacion()!.id.toString()"></app-datos-economicos-card>
 
-        <app-items-show [licitacionId]="licitacion()!.id"></app-items-show>
+        <app-items-show [licitacionId]="licitacion()!.id.toString()"></app-items-show>
     </div>
 
     <div class="actions" *ngIf="!loading()">
